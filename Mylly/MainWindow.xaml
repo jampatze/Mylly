@@ -1,0 +1,53 @@
+﻿<Window x:Class="Mylly.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mylly"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="700" MinHeight="500" MinWidth="500">
+    <Window.CommandBindings>
+        <CommandBinding Command="local:Commands.NewPiece" CanExecute="NewPiece_CanExecute" Executed="NewPiece_Executed"/>
+        <CommandBinding Command="local:Commands.RemovePiece" CanExecute="RemovePiece_CanExecute" Executed="RemovePiece_Executed"/>
+        <CommandBinding Command="local:Commands.NewGame" CanExecute="NewGame_CanExecute" Executed="NewGame_Executed"/>
+        <CommandBinding Command="local:Commands.MovePiece" CanExecute="MovePiece_CanExecute" Executed="MovePiece_Executed"/>
+        <CommandBinding Command="local:Commands.Print" Executed="Print_Executed"/>
+    </Window.CommandBindings>
+    <Grid>
+        <Menu VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="20">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New Game" Command="local:Commands.NewGame"/>
+                <MenuItem Header="_Print" Command="local:Commands.Print"/>
+            </MenuItem>
+            <MenuItem Header="_Game">
+                <MenuItem  x:Name="menuItemInsert" Header="_Add Piece" Command="local:Commands.NewPiece" />
+                <MenuItem x:Name="menuItemRemove" Header="_Remove Piece" Command="local:Commands.RemovePiece"/>
+                <MenuItem x:Name="menuItemMove" Header="_Move Piece" Command="local:Commands.MovePiece"/>
+            </MenuItem>
+            <MenuItem Header="_Tools">
+                <MenuItem Header="_Settings" Click="Settings_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About" Click="About_Click"/>
+                <MenuItem Header="_Help" Click="Help_Click"/>
+            </MenuItem>
+        </Menu>
+        <Grid Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <local:MyllyBoard x:Name="myllyBoard1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="0"/>
+            <Grid Grid.Column="1" Height="119" Margin="30,30,30,0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="buttonInsert" Grid.Row="0" Content="Insert piece" Command="{x:Static local:Commands.NewPiece}"/>
+                <Button x:Name="buttonRemove" Grid.Row="1" Content="Remove piece" Command="{x:Static local:Commands.RemovePiece}"/>
+                <Button x:Name="buttonMove" Grid.Row="2" Content="Move piece" Command="{x:Static local:Commands.MovePiece}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
